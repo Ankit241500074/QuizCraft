@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // In production, serve the built SPA files from client/dist
-const distPath = path.join(__dirname, "../../client/dist");
+const distPath = path.join(process.cwd(), "dist", "spa");
 
 // Serve static files
 app.use(express.static(distPath));
@@ -18,7 +18,7 @@ app.use(express.static(distPath));
 // Handle React Router - serve index.html for all non-API routes
 app.use((req, res, next) => {
   if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
-    return next(); // let API routes handle it
+    return next();
   }
 
   res.sendFile(path.join(distPath, "index.html"));
