@@ -1,19 +1,22 @@
 import path from "path";
-import { createServer } from "./index";
-import * as express from "express";
+import { createServer } from "./index.js"; // compiled output will use .js
+import express from "express";
+import { fileURLToPath } from "url";
 
 const app = createServer();
 
-// In production, serve the built SPA files
-const __dirname = import.meta.dirname;
-const distPath = path.join(__dirname, "../spa");
+// Figure out __dirname since we're in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// In production, serve the built SPA files from client/dist
+const distPath = path.join(__dirname, "../../client/dist");
 
 // Serve static files
 app.use(express.static(distPath));
 
 // Handle React Router - serve index.html for all non-API routes
 app.get("*", (req, res) => {
-  // Don't serve index.html for API routes
   if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
     return res.status(404).json({ error: "API endpoint not found" });
   }
@@ -21,10 +24,11 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-app.listen(3000, () => {
-  console.log(`🚀 Fusion Starter server running on port 3000`);
-  console.log(`📱 Frontend: http://localhost:3000`);
-  console.log(`🔧 API: http://localhost:3000/api`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Fusion Starter server running on port ${PORT}`);
+  console.log(`📱 Frontend: http://localhost:${PORT}`);
+  console.log(`🔧 API: http://localhost:${PORT}/api`);
 });
 
 // Graceful shutdown
