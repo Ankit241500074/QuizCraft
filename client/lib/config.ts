@@ -6,9 +6,7 @@ export const API_CONFIG = {
   },
   // Production (Render)
   production: {
-    // You can set this in your Render environment variables
-    // or update this URL to match your deployed server
-    baseURL: 'https://your-render-app-name.onrender.com',
+    baseURL: 'https://quizcraft-p7qu.onrender.com',
   }
 };
 

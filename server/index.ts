@@ -22,8 +22,7 @@ export function createServer() {
   app.use(cors({
     origin: process.env.NODE_ENV === 'production' 
       ? [
-          'https://your-client-domain.com', // Replace with your actual client domain
-          'https://your-render-app-name.onrender.com', // Replace with your actual client domain
+          'https://quizcraft-p7qu.onrender.com', // Your Render server
           'http://localhost:5173', // Local development
           'http://localhost:3000' // Local development alternative
         ]
