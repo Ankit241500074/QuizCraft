@@ -3,7 +3,6 @@ import { createServer } from "./index";
 import * as express from "express";
 
 const app = createServer();
-const port = process.env.PORT || 3000;
 
 // In production, serve the built SPA files
 const __dirname = import.meta.dirname;
@@ -22,10 +21,10 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-app.listen(port, () => {
-  console.log(`🚀 Fusion Starter server running on port ${port}`);
-  console.log(`📱 Frontend: http://localhost:${port}`);
-  console.log(`🔧 API: http://localhost:${port}/api`);
+app.listen(3000, () => {
+  console.log(`🚀 Fusion Starter server running on port 3000`);
+  console.log(`📱 Frontend: http://localhost:3000`);
+  console.log(`🔧 API: http://localhost:3000/api`);
 });
 
 // Graceful shutdown
