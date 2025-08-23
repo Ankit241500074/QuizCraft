@@ -9,7 +9,7 @@ const app = createServer();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// In production, serve the built SPA files from client/dist
+// ✅ In production, serve the built SPA files from dist/spa
 const distPath = path.join(process.cwd(), "dist", "spa");
 
 // Serve static files
@@ -23,7 +23,6 @@ app.use((req, res, next) => {
 
   res.sendFile(path.join(distPath, "index.html"));
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
