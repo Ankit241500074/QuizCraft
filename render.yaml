@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: quizcraft-server
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build:server
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OPENROUTER_API_KEY
+        sync: false # Set this in Render dashboard
+      - key: PING_MESSAGE
+        value: "QuizCraft Server is running!"
+    healthCheckPath: /api/ping
+    autoDeploy: true

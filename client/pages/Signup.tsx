@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useTheme } from "../contexts/ThemeContext";
+import { buildApiUrl } from "../lib/config";
 
 export default function Signup() {
   const { user, login: authLogin } = useAuth();
@@ -111,7 +112,7 @@ export default function Signup() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch(buildApiUrl("/api/auth/signup"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

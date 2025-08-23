@@ -23,6 +23,7 @@ import {
   CheckCircle
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
+import { buildApiUrl } from "../lib/config";
 
 interface AdminStats {
   totalUsers: number;
@@ -68,7 +69,7 @@ export default function Admin() {
       setIsLoading(true);
       
       // Load admin stats
-      const statsResponse = await fetch('/api/admin/stats', {
+      const statsResponse = await fetch(buildApiUrl('/api/admin/stats'), {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -80,7 +81,7 @@ export default function Admin() {
       }
       
       // Load system configuration
-      const configResponse = await fetch('/api/admin/config', {
+      const configResponse = await fetch(buildApiUrl('/api/admin/config'), {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -107,7 +108,7 @@ export default function Admin() {
       setError(null);
       setSuccess(null);
       
-      const response = await fetch('/api/admin/config/api', {
+      const response = await fetch(buildApiUrl('/api/admin/config/api'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,7 +138,7 @@ export default function Admin() {
       setError(null);
       setSuccess(null);
       
-      const response = await fetch('/api/admin/config/system', {
+      const response = await fetch(buildApiUrl('/api/admin/config/system'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

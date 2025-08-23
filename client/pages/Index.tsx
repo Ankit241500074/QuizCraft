@@ -46,6 +46,7 @@ import { QuizGenerationRequest, QuizGenerationResponse } from "@shared/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useTheme } from "../contexts/ThemeContext";
+import { buildApiUrl } from "../lib/config";
 
 interface MCQ {
   question: string;
@@ -235,7 +236,7 @@ export default function Index() {
         };
         
         // Set up the request
-        xhr.open('POST', '/api/extract-pdf-text');
+        xhr.open('POST', buildApiUrl('/api/extract-pdf-text'));
         
         // Set authorization header
         const authToken = localStorage.getItem('authToken');
@@ -282,7 +283,7 @@ export default function Index() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
 
-      const response = await fetch("/api/generate-quiz", {
+      const response = await fetch(buildApiUrl("/api/generate-quiz"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Brain, Mail, ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
+import { buildApiUrl } from "../lib/config";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ export default function ForgotPassword() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/forgot-password", {
+      const response = await fetch(buildApiUrl("/api/auth/forgot-password"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

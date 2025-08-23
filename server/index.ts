@@ -19,7 +19,17 @@ export function createServer() {
   const app = express();
 
   // Middleware
-  app.use(cors());
+  app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+      ? [
+          'https://your-client-domain.com', // Replace with your actual client domain
+          'https://your-render-app-name.onrender.com', // Replace with your actual client domain
+          'http://localhost:5173', // Local development
+          'http://localhost:3000' // Local development alternative
+        ]
+      : true,
+    credentials: true
+  }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 

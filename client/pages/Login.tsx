@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useTheme } from "../contexts/ThemeContext";
+import { buildApiUrl } from "../lib/config";
 
 export default function Login() {
   const { user, login: authLogin } = useAuth();
@@ -57,7 +58,7 @@ export default function Login() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch(buildApiUrl("/api/auth/login"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
